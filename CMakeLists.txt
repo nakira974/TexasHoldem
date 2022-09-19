@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(GlApiWrapping)
+set(PROJECT_NAME TexasHoldem)
+project(${PROJECT_NAME})
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -23,6 +24,9 @@ file(GLOB_RECURSE HEADERS_FILES
         ${PROJECT_SOURCE_DIR}/src/*.hpp
         ${PROJECT_SOURCE_DIR}/src/*.h
         ${PROJECT_SOURCE_DIR}/src/*.inl
+        ${PROJECT_SOURCE_DIR}/includes/*.hpp
+        ${PROJECT_SOURCE_DIR}/includes/*.h
+        ${PROJECT_SOURCE_DIR}/includes/*.inl
         )
 file(GLOB_RECURSE SOURCES_FILES
         ${PROJECT_SOURCE_DIR}/src/*.cpp
@@ -30,5 +34,5 @@ file(GLOB_RECURSE SOURCES_FILES
         )
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-add_executable(GlApiWrapping ${SOURCES_FILES} ${HEADERS_FILES})
-target_link_libraries(GlApiWrapping glfw)
+add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADERS_FILES})
+target_link_libraries(${PROJECT_NAME} glfw)
