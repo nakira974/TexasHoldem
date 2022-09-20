@@ -1,5 +1,4 @@
-#include <assert.h>
-#include <stdio.h>
+
 
 #include "GL.h"
 
@@ -11,6 +10,11 @@
 #include <stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
+
+
+#include <optick.h>
+#include <chrono>
+#include <thread>
 
 using glm::mat4;
 using glm::vec3;
@@ -52,7 +56,10 @@ void main()
 
 int main()
 {
-	glfwSetErrorCallback(
+    OPTICK_THREAD( "MainThread" );
+    OPTICK_START_CAPTURE();
+
+    glfwSetErrorCallback(
 		[](int error, const char* description)
 		{
 			fprintf(stderr, "Error: %s\n", description);
@@ -86,7 +93,8 @@ int main()
 
 	GL4API api;
 
-	GetAPI4(&api, [](const char* func) -> void* { return (void *)glfwGetProcAddress(func); });
+    OPTICK_PUSH( "Create resources" );
+    GetAPI4(&api, [](const char* func) -> void* { return (void *)glfwGetProcAddress(func); });
 	InjectAPITracer4(&api);
 
 	const GLuint shaderVertex = api.glCreateShader(GL_VERTEX_SHADER);
@@ -129,8 +137,11 @@ int main()
 
 	api.glBindTextures(0, 1, &texture);
 
+    OPTICK_POP();
+
 	while (!glfwWindowShouldClose(window))
 	{
+        OPTICK_FRAME( "MainLoop" )
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		const float ratio = width / (float)height;
@@ -143,23 +154,41 @@ int main()
 		const mat4 mvp = p * m;
 
 		api.glUseProgram(program);
-		api.glNamedBufferSubData(perFrameDataBuffer, 0, kBufferSize, glm::value_ptr(mvp));
-		api.glDrawArrays(GL_TRIANGLES, 0, 3);
+        {
+            OPTICK_PUSH( "Pass1" );
+            std::this_thread::sleep_for( std::chrono::milliseconds(2) );
+            api.glNamedBufferSubData(perFrameDataBuffer, 0, kBufferSize, glm::value_ptr(mvp));
+            api.glDrawArrays(GL_TRIANGLES, 0, 3);
+            OPTICK_POP();
+        }
 
+        {
+            OPTICK_PUSH( "glfwSwapBuffers()" );
+            glfwSwapBuffers(window);
+            OPTICK_POP();
+        }
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+        {
+            OPTICK_PUSH( "glfwPollEvents()" );
+            std::this_thread::sleep_for( std::chrono::milliseconds(2) );
+            glfwPollEvents();
+            OPTICK_POP();
+        }
 	}
 
+    OPTICK_PUSH("Deleting OpenGL 4.6 resources")
 	api.glDeleteTextures(1, &texture);
 	api.glDeleteBuffers(1, &perFrameDataBuffer);
 	api.glDeleteProgram(program);
 	api.glDeleteShader(shaderFragment);
 	api.glDeleteShader(shaderVertex);
 	api.glDeleteVertexArrays(1, &vao);
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    OPTICK_POP();
 
-	glfwDestroyWindow(window);
-	glfwTerminate();
+    OPTICK_STOP_CAPTURE();
+    OPTICK_SAVE_CAPTURE( "profiler_dump" );
 
 	return 0;
 }

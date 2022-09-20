@@ -1,4 +1,7 @@
-	PFNGLACTIVETEXTUREPROC										glActiveTexture;
+
+#include "glcorearb.h"
+
+    PFNGLACTIVETEXTUREPROC										glActiveTexture;
 	PFNGLATTACHSHADERPROC										glAttachShader;
 	PFNGLBEGINQUERYPROC											glBeginQuery;
 	PFNGLBINDATTRIBLOCATIONPROC								glBindAttribLocation;
