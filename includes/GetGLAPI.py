@@ -212,7 +212,7 @@ def main():
 	print("}")
 	print("")
 	# generate API struct
-	out = open( "GLAPI.h", "wt" )
+	out = open("GLAPI.h", "wt")
 	for line in WrapFuncs:
 		line.strip();
 		if str.find( line, "//" ) == 0 or line == "": continue

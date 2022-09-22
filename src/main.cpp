@@ -1,6 +1,7 @@
 
 
-#include "GL.h"
+#include "../includes/GL.h"
+#include <easy/profiler.h>
 
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -12,7 +13,6 @@
 #include <stb_image_write.h>
 
 
-#include <optick.h>
 #include <chrono>
 #include <thread>
 
@@ -56,8 +56,8 @@ void main()
 
 int main()
 {
-    OPTICK_THREAD( "MainThread" );
-    OPTICK_START_CAPTURE();
+    EASY_MAIN_THREAD;
+    EASY_PROFILER_ENABLE;
 
     glfwSetErrorCallback(
 		[](int error, const char* description)
@@ -93,7 +93,7 @@ int main()
 
 	GL4API api;
 
-    OPTICK_PUSH( "Create resources" );
+    EASY_BLOCK("Create resources");
     GetAPI4(&api, [](const char* func) -> void* { return (void *)glfwGetProcAddress(func); });
 	InjectAPITracer4(&api);
 
@@ -137,11 +137,11 @@ int main()
 
 	api.glBindTextures(0, 1, &texture);
 
-    OPTICK_POP();
+    EASY_END_BLOCK;
 
 	while (!glfwWindowShouldClose(window))
 	{
-        OPTICK_FRAME( "MainLoop" )
+        EASY_BLOCK("MainLoop");
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		const float ratio = width / (float)height;
@@ -155,28 +155,25 @@ int main()
 
 		api.glUseProgram(program);
         {
-            OPTICK_PUSH( "Pass1" );
-            std::this_thread::sleep_for( std::chrono::milliseconds(2) );
+            EASY_BLOCK( "Pass1" );
+            //std::this_thread::sleep_for( std::chrono::milliseconds(2) );
             api.glNamedBufferSubData(perFrameDataBuffer, 0, kBufferSize, glm::value_ptr(mvp));
             api.glDrawArrays(GL_TRIANGLES, 0, 3);
-            OPTICK_POP();
         }
 
         {
-            OPTICK_PUSH( "glfwSwapBuffers()" );
+            EASY_BLOCK( "glfwSwapBuffers()" );
             glfwSwapBuffers(window);
-            OPTICK_POP();
         }
 
         {
-            OPTICK_PUSH( "glfwPollEvents()" );
-            std::this_thread::sleep_for( std::chrono::milliseconds(2) );
+            EASY_BLOCK( "glfwPollEvents()" );
+            //std::this_thread::sleep_for( std::chrono::milliseconds(2) );
             glfwPollEvents();
-            OPTICK_POP();
         }
 	}
 
-    OPTICK_PUSH("Deleting OpenGL 4.6 resources")
+    EASY_BLOCK("Deleting OpenGL 4.6 resources");
 	api.glDeleteTextures(1, &texture);
 	api.glDeleteBuffers(1, &perFrameDataBuffer);
 	api.glDeleteProgram(program);
@@ -185,10 +182,8 @@ int main()
 	api.glDeleteVertexArrays(1, &vao);
     glfwDestroyWindow(window);
     glfwTerminate();
-    OPTICK_POP();
 
-    OPTICK_STOP_CAPTURE();
-    OPTICK_SAVE_CAPTURE( "profiler_dump" );
+    profiler::dumpBlocksToFile("profiler_dump.prof");
 
 	return 0;
 }

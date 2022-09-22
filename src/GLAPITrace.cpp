@@ -1,7 +1,7 @@
 ﻿#include <assert.h>
 
-#include "GL.h"
-#include "GLAPITrace.h"
+#include "../includes/GL.h"
+#include "../includes/GLAPITrace.h"
 
 #define W( en ) if ( e == en ) return #en;
 

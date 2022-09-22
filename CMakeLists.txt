@@ -2,9 +2,12 @@ cmake_minimum_required(VERSION 3.12)
 
 set(PROJECT_NAME TexasHoldem)
 project(${PROJECT_NAME} CXX C)
-option(BUILD_WITH_OPTICK "Enable Optick usage" ON)
+option(BUILD_WITH_EASY_PROFILER "Enable EasyProfiler usage" ON)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+set(EASY_PROFILER_NO_GUI ON CACHE BOOL "")
+set(EASY_PROFILER_NO_SAMPLES ON CACHE BOOL "")
 
 if(WIN32)
     set(PYTHON_EXECUTABLE "python")
@@ -13,27 +16,23 @@ else()
     set(PYTHON_EXECUTABLE "python3")
 endif()
 
+if(BUILD_WITH_EASY_PROFILER)
+    message("-- Enabled EasyProfiler")
+    add_definitions(-DBUILD_WITH_EASY_PROFILER=1)
+    include_directories(deps/easy_profiler/include)
+    #set_property(TARGET easy_profiler PROPERTY FOLDER "ThirdPartyLibraries")
+    #set_property(TARGET profiler_converter PROPERTY FOLDER "ThirdPartyLibraries")
+endif()
+
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "")
 set(GLFW_INSTALL OFF CACHE BOOL "")
-set(Optick_DIR deps/optick/cmake-build-debug)
+#set(Optick_DIR deps/optick/cmake-build-debug)
 
 add_subdirectory(deps/glfw)
+add_subdirectory(deps/easy_sources)
 
-if(BUILD_WITH_OPTICK)
-    message("Enabled Optick")
-    add_definitions(-DBUILD_WITH_OPTICK=1)
-else()
-    message("Disabled Optick")
-endif()
-
-if(BUILD_WITH_OPTICK)
-    add_subdirectory(deps/optick)
-    message("Optick has been correctly included")
-else()
-    message("Optick could not be included into ${PROJECT_NAME}")
-endif()
 include_directories(deps/glm)
 include_directories(deps/stb)
 
@@ -55,4 +54,4 @@ file(GLOB_RECURSE SOURCES_FILES
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADERS_FILES})
-target_link_libraries(${PROJECT_NAME} glfw OptickCore)#Optick::OptickCore
+target_link_libraries(${PROJECT_NAME} glfw easy_profiler)#Optick::OptickCore

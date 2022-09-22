@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deps/EasyProfiler" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deps/easy_profiler" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/deps/optick" vcs="Git" />
   </component>
 </project>

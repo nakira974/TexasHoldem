@@ -7,6 +7,7 @@ using PFNGETGLPROC = void* (const char*);
 struct GL4API
 {
 #	include "GLAPI.h"
+"glcorearb.h"
 };
 
 void GetAPI4(GL4API* api, PFNGETGLPROC GetGLProc);
