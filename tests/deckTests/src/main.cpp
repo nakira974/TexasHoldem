@@ -13,10 +13,7 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <stb_image_write.h>
 
 
 #include <chrono>
@@ -58,9 +55,12 @@ void main()
 )";
 
 void test_create_guid();
+void test_load_resource(const char * path);
 
 int main(){
+    const char * resourcePath = "data/ch2_sample3_STB.jpg";
     test_create_guid();
+    test_load_resource(resourcePath);
     return 0;
 }
 
@@ -72,4 +72,12 @@ int main(){
      stream << myGuid;
      result = (stream.str().length() == 0) ? result : stream.str();
      ASSERT_FALSE(std::equal(result.begin(), result.end(), ""));
+}
+
+void test_load_resource(const char* path){
+    bool result;
+    int w, h, comp;
+    const uint8_t* image = stbi_load(path, &w, &h, &comp, 3);
+    result = (image != nullptr);
+    ASSERT_TRUE(result);
 }

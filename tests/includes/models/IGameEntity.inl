@@ -8,11 +8,18 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <utility>
 #include <vector>
 #include "GLShader.h"
 #include "PerFrameData.hpp"
 #include <crossguid/guid.hpp>
 #include <iostream>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb_image_write.h>
+
 
 namespace TexasHoldem {
     class IGameEntity {
@@ -28,11 +35,10 @@ namespace TexasHoldem {
 
         }
 
-        IGameEntity(std::vector<GLShader*> shaders, PerFrameData* perFrameData, uint8_t image){
-            Image = image;
+        IGameEntity(std::vector<GLShader*> shaders, PerFrameData* perFrameData){
             FrameData = perFrameData;
             Hashcode = setNewGuid();
-            Shaders = shaders;
+            Shaders = std::move(shaders);
         }
 #endif //Constructors
 
@@ -42,17 +48,19 @@ namespace TexasHoldem {
         std::vector<GLShader*> Shaders;
         PerFrameData* FrameData;
         std::string Hashcode;
-        uint8_t Image;
+        uint8_t* Image;
 #endif //Properties
 
 
 #ifndef Methods
 #define Methods
     public :
-        bool load(){
-        bool result = false;
-
-        return result;
+        bool load(char * resourcePath){
+            bool result = false;
+            int w, h, comp;
+            Image = stbi_load(resourcePath, &w, &h, &comp, 3);
+            result = (Image != nullptr);
+            return result;
         }
 
         bool unload(){
