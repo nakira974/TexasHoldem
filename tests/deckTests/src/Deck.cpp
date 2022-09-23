@@ -5,4 +5,5 @@
 #include "../../includes/models/Deck.hpp"
 
 namespace TexasHoldem {
+
 } // TexasHoldem

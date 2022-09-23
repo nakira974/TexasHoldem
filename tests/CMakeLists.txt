@@ -31,12 +31,13 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "")
 set(GLFW_INSTALL OFF CACHE BOOL "")
 #set(Optick_DIR deps/optick/cmake-build-debug)
 
-add_subdirectory(deckTests)
 
 add_subdirectory(deps/glfw)
 add_subdirectory(deps/easy_sources)
-include_directories(deps/glm)
-include_directories(deps/stb)
+
+include_directories(${CMAKE_SOURCE_DIR}/deps/glm)
+include_directories(${CMAKE_SOURCE_DIR}/deps/stb)
+include_directories(${CMAKE_SOURCE_DIR}/includes)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -47,6 +48,8 @@ FetchContent_Declare(
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
+
+add_subdirectory(deckTests)
 
 
 
