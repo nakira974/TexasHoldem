@@ -24,8 +24,8 @@ namespace TexasHoldem {
 #define Properties
     public:
         short Number;
-    public:
         std::string Name;
+        uint8_t Image;
 #endif //Properties
 
 #ifndef Methods

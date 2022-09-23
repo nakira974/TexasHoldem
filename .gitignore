@@ -3,3 +3,7 @@
 /src/Pipfile.lock
 /deps/optick/cmake-build-debug/
 /deps/optick/cmake-build-release/
+/tests/cmake-build-release/
+/tests/cmake-build-debug/
+/tests/deckTests/cmake-build-debug/
+/tests/deckTests/cmake-build-release/
