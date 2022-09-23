@@ -6,6 +6,7 @@
 #include "gtest/gtest.h"
 
 #include "../includes/GL.h"
+#include "crossguid/guid.hpp"
 #include <easy/profiler.h>
 
 #include <GLFW/glfw3.h>
@@ -56,13 +57,19 @@ void main()
 };
 )";
 
-void test_gtest();
+void test_create_guid();
 
 int main(){
-    test_gtest();
+    test_create_guid();
     return 0;
 }
 
- void test_gtest(){
-    ASSERT_TRUE(isdigit(6.0));
+
+ void test_create_guid(){
+    std::string result = "";
+     auto myGuid = xg::newGuid();
+     std::stringstream stream;
+     stream << myGuid;
+     result = (stream.str().length() == 0) ? result : stream.str();
+     ASSERT_FALSE(std::equal(result.begin(), result.end(), ""));
 }

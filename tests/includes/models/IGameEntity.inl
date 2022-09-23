@@ -50,11 +50,15 @@ namespace TexasHoldem {
 #define Methods
     public :
         bool load(){
+        bool result = false;
 
+        return result;
         }
 
         bool unload(){
+            bool result = false;
 
+            return result;
     }
 
     private:
