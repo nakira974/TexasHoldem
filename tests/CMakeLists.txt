@@ -34,6 +34,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 
 add_subdirectory(deps/glfw)
 add_subdirectory(deps/easy_sources)
+add_subdirectory(deps/crossguid)
 
 include_directories(${CMAKE_SOURCE_DIR}/deps/glm)
 include_directories(${CMAKE_SOURCE_DIR}/deps/stb)
@@ -50,6 +51,8 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(deckTests)
+
+
 
 
 

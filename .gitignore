@@ -8,3 +8,5 @@
 /tests/cmake-build-debug/
 /tests/deckTests/cmake-build-debug/
 /tests/deckTests/cmake-build-release/
+/tests/bin/
+/bin/

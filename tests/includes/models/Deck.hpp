@@ -15,7 +15,11 @@ namespace TexasHoldem {
     class Deck : IGameEntity {
 #ifndef Constructors
 #define Constructors
-
+    public:
+        ~Deck(){
+        }
+        Deck(){
+        }
 #endif //Constructors
 
 #ifndef Properties

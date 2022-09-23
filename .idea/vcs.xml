@@ -5,5 +5,6 @@
     <mapping directory="$PROJECT_DIR$/deps/EasyProfiler" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/deps/easy_profiler" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/deps/optick" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tests/deps/crossguid" vcs="Git" />
   </component>
 </project>
