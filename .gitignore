@@ -10,3 +10,6 @@
 /tests/deckTests/cmake-build-release/
 /tests/bin/
 /bin/
+/bin/*.exe
+/bin/*.ilk
+/bin/*.pdb
