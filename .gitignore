@@ -1,5 +1,6 @@
 # Project exclude paths
 /cmake-build-debug/
+/cmake-build-release/
 /src/Pipfile.lock
 /deps/optick/cmake-build-debug/
 /deps/optick/cmake-build-release/
