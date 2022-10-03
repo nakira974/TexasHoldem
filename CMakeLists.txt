@@ -32,6 +32,8 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 
 add_subdirectory(deps/glfw)
 add_subdirectory(deps/easy_sources)
+add_subdirectory(deps/crossguid)
+
 
 include_directories(deps/glm)
 include_directories(deps/stb)
@@ -57,5 +59,6 @@ set(CMAKE_PDB_OUTPUT_DIRECTORY  ${CMAKE_SOURCE_DIR}/bin/pdb)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY   ${CMAKE_SOURCE_DIR}/bin/archive)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY    ${CMAKE_SOURCE_DIR}/bin/lib)
 
-add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADERS_FILES})
-target_link_libraries(${PROJECT_NAME} glfw easy_profiler)#Optick::OptickCore
+add_subdirectory(src)
+add_subdirectory(tests)
+#Optick::OptickCore

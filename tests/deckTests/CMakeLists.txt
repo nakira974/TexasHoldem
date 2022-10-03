@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-set(PROJECT_NAME deck_tests)
+set(PROJECT_NAME TexasHoldem_Test)
 set(TEST_NAME "Deck tests")
 project(${PROJECT_NAME} CXX C)
 

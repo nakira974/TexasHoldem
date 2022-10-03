@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 
-set(PROJECT_NAME TexasHoldem_Tests)
 project(${PROJECT_NAME} CXX C)
 
 option(BUILD_WITH_EASY_PROFILER "Enable EasyProfiler usage" ON)
@@ -38,9 +37,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 #set(Optick_DIR deps/optick/cmake-build-debug)
 
 
-add_subdirectory(../deps/glfw)
-add_subdirectory(../deps/easy_sources)
-add_subdirectory(../deps/crossguid)
+
 
 include_directories(../deps/glm)
 include_directories(../deps/stb)

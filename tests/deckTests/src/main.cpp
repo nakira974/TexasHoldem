@@ -95,6 +95,7 @@ void test_load_resource(const char* path){
 void test_load_image(){
     EASY_MAIN_THREAD;
     EASY_PROFILER_ENABLE;
+
     GLuint* shaderVertex ;
     GLuint*shaderFragment;
     GLuint* vao ;
@@ -194,7 +195,6 @@ GL4API createTextures(GLuint* shaderVertex , GLuint* shaderFragment,
                       GLuint* texture, GLuint* program, GLuint* kBufferSize){
     GL4API api{};
 
-    EASY_BLOCK("Create resources");
     GetAPI4(&api, [](const char* func) -> void* { return (void *)glfwGetProcAddress(func); });
     InjectAPITracer4(&api);
 
