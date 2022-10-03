@@ -1,6 +1,8 @@
 #include <string>
 #include <inttypes.h>
-
+#include <cassert>
+#include "GL.h"
+#include "glcorearb.h"
 namespace
 {
 	GL4API apiHook;

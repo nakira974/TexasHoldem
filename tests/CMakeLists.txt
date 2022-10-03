@@ -25,6 +25,12 @@ if(BUILD_WITH_EASY_PROFILER)
     #set_property(TARGET profiler_converter PROPERTY FOLDER "ThirdPartyLibraries")
 endif()
 
+file(GLOB_RECURSE INCLUDES_FILES
+        ../includes/*.hpp
+        ../includes/*.h
+        ../includes/*.inl
+        )
+
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "")
@@ -32,13 +38,14 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 #set(Optick_DIR deps/optick/cmake-build-debug)
 
 
-add_subdirectory(deps/glfw)
-add_subdirectory(deps/easy_sources)
-add_subdirectory(deps/crossguid)
+add_subdirectory(../deps/glfw)
+add_subdirectory(../deps/easy_sources)
+add_subdirectory(../deps/crossguid)
 
-include_directories(${CMAKE_SOURCE_DIR}/deps/glm)
-include_directories(${CMAKE_SOURCE_DIR}/deps/stb)
-include_directories(${CMAKE_SOURCE_DIR}/includes)
+include_directories(../deps/glm)
+include_directories(../deps/stb)
+include_directories(../includes)
+include_directories(../includes/models)
 
 include(FetchContent)
 FetchContent_Declare(

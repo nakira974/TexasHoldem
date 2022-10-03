@@ -7,15 +7,19 @@
 
 #ifndef Includes
 #define Includes
-
+#include "IGameEntity.inl"
 #endif //Includes
 
 namespace TexasHoldem {
 
-    class Deck {
+    class Deck : IGameEntity {
 #ifndef Constructors
 #define Constructors
-
+    public:
+        ~Deck(){
+        }
+        Deck(){
+        }
 #endif //Constructors
 
 #ifndef Properties

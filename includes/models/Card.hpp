@@ -10,13 +10,22 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
+#include "IGameEntity.inl"
 #endif //Includes
 
 namespace TexasHoldem {
-    class Card {
+    class Card :  IGameEntity {
 #ifndef Constructors
 #define Constructors
+    public :
+        ~Card(){
 
+        }
+
+         Card(){
+
+        }
 #endif //Constructors
 
 
@@ -24,8 +33,7 @@ namespace TexasHoldem {
 #define Properties
     public:
         short Number;
-        std::string Name;
-        uint8_t Image;
+
 #endif //Properties
 
 #ifndef Methods

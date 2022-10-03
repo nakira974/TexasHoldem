@@ -32,7 +32,6 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 
 add_subdirectory(deps/glfw)
 add_subdirectory(deps/easy_sources)
-add_subdirectory(tests/deckTests)
 
 include_directories(deps/glm)
 include_directories(deps/stb)

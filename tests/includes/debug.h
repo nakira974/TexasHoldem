@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include "glcorearb.h"
+#include "GLAPI.h"
 
 void message_callback( GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const* message, void const* user_param )
 {
@@ -46,8 +48,8 @@ void message_callback( GLenum source, GLenum type, GLuint id, GLenum severity, G
 
 void initDebug()
 {
-	glDebugMessageCallback( message_callback, nullptr );
+	//glDebugMessageCallback( message_callback, nullptr );
 	glEnable( GL_DEBUG_OUTPUT );
 	glEnable( GL_DEBUG_OUTPUT_SYNCHRONOUS );
-	glDebugMessageControl( GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE );
+	//glDebugMessageControl( GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE );
 };
