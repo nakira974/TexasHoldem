@@ -1,7 +1,4 @@
-
-#include "glcorearb.h"
-
-    PFNGLACTIVETEXTUREPROC										glActiveTexture;
+	PFNGLACTIVETEXTUREPROC										glActiveTexture;
 	PFNGLATTACHSHADERPROC										glAttachShader;
 	PFNGLBEGINQUERYPROC											glBeginQuery;
 	PFNGLBINDATTRIBLOCATIONPROC								glBindAttribLocation;
@@ -13,6 +10,7 @@
 	PFNGLBINDTEXTUREUNITPROC									glBindTextureUnit;
 	PFNGLBINDTEXTURESPROC										glBindTextures;
 	PFNGLBINDVERTEXARRAYPROC									glBindVertexArray;
+	PFNGLBLENDEQUATIONPROC										glBlendEquation;
 	PFNGLBLENDFUNCPROC											glBlendFunc;
 	PFNGLBLITNAMEDFRAMEBUFFERPROC								glBlitNamedFramebuffer;
 	PFNGLBUFFERDATAPROC											glBufferData;
@@ -69,6 +67,7 @@
 	PFNGLDRAWARRAYSINSTANCEDPROC								glDrawArraysInstanced;
 	PFNGLDRAWBUFFERSPROC											glDrawBuffers;
 	PFNGLDRAWELEMENTSPROC										glDrawElements;
+	PFNGLDRAWELEMENTSBASEVERTEXPROC							glDrawElementsBaseVertex;
 	PFNGLDRAWELEMENTSINSTANCEDPROC							glDrawElementsInstanced;
 	PFNGLENABLEPROC												glEnable;
 	PFNGLENABLEVERTEXARRAYATTRIBPROC							glEnableVertexArrayAttrib;

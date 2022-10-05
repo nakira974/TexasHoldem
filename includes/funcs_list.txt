@@ -213,3 +213,5 @@ glGetVertexArrayIndexed64iv
 glCreateSamplers
 glCreateProgramPipelines
 glCreateQueries
+glBlendEquation
+glDrawElementsBaseVertex

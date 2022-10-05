@@ -13,3 +13,5 @@
 /bin/*.exe
 /bin/*.ilk
 /bin/*.pdb
+/cmake-build-debug-mingw/
+/bin/

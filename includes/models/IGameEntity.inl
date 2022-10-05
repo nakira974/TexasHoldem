@@ -10,15 +10,10 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include "GLShader.h"
+#include "../glFramework/GLShader.h"
 #include "PerFrameData.hpp"
 #include <crossguid/guid.hpp>
 #include <iostream>
-
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <stb_image_write.h>
 
 
 namespace TexasHoldem {
@@ -55,19 +50,7 @@ namespace TexasHoldem {
 #ifndef Methods
 #define Methods
     public :
-        bool load(char * resourcePath){
-            bool result = false;
-            int w, h, comp;
-            Image = stbi_load(resourcePath, &w, &h, &comp, 3);
-            result = (Image != nullptr);
-            return result;
-        }
 
-        bool unload(){
-            bool result = false;
-
-            return result;
-    }
 
     private:
         static std::string setNewGuid()

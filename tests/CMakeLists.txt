@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.22)
 
 project(${PROJECT_NAME} CXX C)
 
@@ -24,11 +24,7 @@ if(BUILD_WITH_EASY_PROFILER)
     #set_property(TARGET profiler_converter PROPERTY FOLDER "ThirdPartyLibraries")
 endif()
 
-file(GLOB_RECURSE INCLUDES_FILES
-        ../includes/*.hpp
-        ../includes/*.h
-        ../includes/*.inl
-        )
+
 
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
@@ -41,6 +37,8 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 
 include_directories(../deps/glm)
 include_directories(../deps/stb)
+include_directories(../deps/gli)
+include_directories(../deps/taskflow)
 include_directories(../includes)
 include_directories(../includes/models)
 
